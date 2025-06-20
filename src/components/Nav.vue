@@ -16,7 +16,7 @@
                     </li>
                     <li class="nav__item" @click="toggleNav"><router-link class="nav__link"
                             to="/products">Products</router-link></li>
-                    <li class="nav__item" @click="toggleNav"><router-link class="nav__link" to="/about">About
+                    <li class="nav__item" @click="toggleNav"><router-link class="nav__link" to="/contact">Contact
                             us</router-link></li>
                 </ul>
             </div>
@@ -57,6 +57,16 @@ export default defineComponent({
         CartButton
     },
 
+    mounted() {
+        // Add resize event listener to close menu on resize
+        window.addEventListener('resize', this.handleResize)
+    },
+
+    beforeUnmount() {
+        // Clean up event listener when component is destroyed
+        window.removeEventListener('resize', this.handleResize)
+    },
+
     methods: {
         toggleNav(): void {
             this.isNavOpen = !this.isNavOpen
@@ -71,6 +81,16 @@ export default defineComponent({
         },
         toggleCart(): void {
             this.isCartOpen = !this.isCartOpen;
+        },
+        handleResize(): void {
+            // Close the navigation menu when window is resized
+            if (this.isNavOpen) {
+                this.isNavOpen = false
+                const navLinks = document.querySelector('.nav-links')
+                if (navLinks) {
+                    navLinks.classList.remove('active')
+                }
+            }
         }
     }
 })

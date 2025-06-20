@@ -1,6 +1,6 @@
-# 🌿 Saqaya Internship E-Commerce Project
+# Saqaya Internship E-Commerce Project
 
-Live Demo: [saqaya-internship-liard.vercel.app](https://saqaya-internship-liard.vercel.app/)
+Live Demo: [saqaya-internship-liard.vercel.app](https://saqaya-internship-six.vercel.app/)
 GitHub Repo: [github.com/AliMohamed35/Saqaya-internship](https://github.com/AliMohamed35/Saqaya-internship)
 
 ## 📦 Overview
@@ -10,8 +10,6 @@ This project is part of a 4-week internship at *Saqaya, where the goal is to bui
 The app allows users to:
 
 * Browse a list of products
-* View detailed product information in a modal
-* Add items to the cart
 * Navigate through a user-friendly interface
 
 ## 🔧 Tech Stack
@@ -19,6 +17,7 @@ The app allows users to:
 * *Vue 3* (Options API → Composition API planned in week 4)
 * *TypeScript*
 * *Vite* (for fast development)
+* *Vuex*
 * *Pinia* (for state management, optional if used) (Future improvments)
 * *Vercel* (for deployment)
 * *CSS* (or any framework like Tailwind, if used)
@@ -30,6 +29,11 @@ The app allows users to:
 * *Component-Based Design*: Clean and modular structure using reusable components.
 * *Responsive Layout*: Works well on mobile and desktop.
 * *Vite-Powered Dev Server*: Super fast development environment.
+
+## Future improvements
+* View detailed product information in a modal
+* Add items to the cart
+* Migrating to vue 3
 
 ## 🚀 Getting Started
 

@@ -18,6 +18,7 @@
     background-image: url('/recycled-shoe-store-hero-image-bg.jpg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
     background-color: black;
     color: white;
 
@@ -29,6 +30,18 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .hero__section-container {
+        min-height: 350px;
+        padding: 1rem;
+    }
+
+    .hero__section-container h2 {
+        font-size: 1.5rem;
+    }
 }
 
 /* .section__container {

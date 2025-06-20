@@ -13,7 +13,7 @@
 
     <div class="btns">
         <button class="btns__button">Add to cart</button>
-        <a class="btns__link" href="#">Details</a>
+        <a class="btns__link" href="#"><router-link :to="`/product/${product.id}`">Details</router-link></a>
     </div>
 </template>
 
@@ -92,6 +92,14 @@ export default defineComponent({
     margin: 1rem 0;
 }
 
+.btns a {
+    text-decoration: none !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    color: #ff9e21;
+}
+
 .btns__button {
     padding: .5rem 1.3rem;
     background-color: black;
@@ -104,14 +112,6 @@ export default defineComponent({
     cursor: pointer;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.309);
     transition: ease 0.3s;
-}
-
-.btns__link {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-
-    color: #ff9e21;
 }
 
 .btns__link:hover {

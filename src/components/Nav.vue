@@ -27,10 +27,10 @@
                 <a href="#" class="nav__icon-link"><i class="fas fa-search"></i></a>
                 <a href="#" class="nav__signin-link">Sign in</a>
 
-                <button class="nav__cart-btn" @click="toggleCart"><i class="fas fa-shopping-cart"></i></button>
+                <CartButton @click="toggleCart" />
 
                 <teleport to="body">
-                    <Cart :open="isCartOpen" @close="toggleCart" />
+                    <CartDrawer :open="isCartOpen" @close="toggleCart" />
                 </teleport>
             </div>
         </nav>
@@ -40,6 +40,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import CartDrawer from './CartDrawer.vue'
+import CartButton from './CartButton.vue'
 
 
 export default defineComponent({
@@ -48,6 +50,11 @@ export default defineComponent({
             isNavOpen: false,
             isCartOpen: false
         }
+    },
+
+    components: {
+        CartDrawer,
+        CartButton
     },
 
     methods: {

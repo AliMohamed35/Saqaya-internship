@@ -79,6 +79,7 @@ export default defineComponent({
     align-items: center;
     padding: 20px 30px;
     position: relative;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.109);
 }
 
 .nav__links {

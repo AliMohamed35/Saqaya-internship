@@ -64,4 +64,12 @@ section {
     width: 320px;
     max-width: 100%;
 }
+
+@media(max-width:768px) {
+    .section__title {
+        flex-direction: column;
+        margin-bottom: 1rem;
+        border-bottom: none;
+    }
+}
 </style>

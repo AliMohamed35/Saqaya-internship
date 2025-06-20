@@ -1,33 +1,74 @@
-# saqaya-project
+# 🌿 Saqaya Internship E-Commerce Project
 
-This template should help get you started developing with Vue 3 in Vite.
+Live Demo: [saqaya-internship-liard.vercel.app](https://saqaya-internship-liard.vercel.app/)
+GitHub Repo: [github.com/AliMohamed35/Saqaya-internship](https://github.com/AliMohamed35/Saqaya-internship)
 
-## Recommended IDE Setup
+## 📦 Overview
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+This project is part of a 4-week internship at *Saqaya, where the goal is to build a feature-rich e-commerce web application using **Vue 3* and *TypeScript*.
 
-## Type Support for `.vue` Imports in TS
+The app allows users to:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+* Browse a list of products
+* View detailed product information in a modal
+* Add items to the cart
+* Navigate through a user-friendly interface
 
-## Customize configuration
+## 🔧 Tech Stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+* *Vue 3* (Options API → Composition API planned in week 4)
+* *TypeScript*
+* *Vite* (for fast development)
+* *Pinia* (for state management, optional if used) (Future improvments)
+* *Vercel* (for deployment)
+* *CSS* (or any framework like Tailwind, if used)
 
-## Project Setup
+## 🧠 Features
 
-```sh
+* *Dynamic Props*: Products passed using strongly-typed props.
+* *Modal with Events*: Product details are shown in a modal triggered via props and closed using $emit.
+* *Component-Based Design*: Clean and modular structure using reusable components.
+* *Responsive Layout*: Works well on mobile and desktop.
+* *Vite-Powered Dev Server*: Super fast development environment.
+
+## 🚀 Getting Started
+
+### Clone the Repo
+
+bash
+git clone https://github.com/AliMohamed35/Saqaya-internship
+cd Saqaya-internship
+
+
+### Install Dependencies
+
+bash
 npm install
-```
 
-### Compile and Hot-Reload for Development
 
-```sh
+### Run Development Server
+
+bash
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
 
-```sh
+### Build for Production
+
+bash
 npm run build
-```
+
+
+## 🌐 Deployment
+
+The app is deployed via [Vercel](https://vercel.com/). To deploy:
+
+1. Push your changes to GitHub
+2. Connect the repo to Vercel
+3. Vercel auto-builds and deploys from the main branch
+
+## 📚 Learning Goals
+
+* Master Vue 3 Options API → gradually refactor to Composition API
+* Write maintainable TypeScript in a frontend context
+* Improve component communication and state flow
+* Gain hands-on deployment experience with Vercel

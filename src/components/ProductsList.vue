@@ -1,8 +1,9 @@
 <template>
-    <div v-show="isLoading" class="products__loading">Loading...</div>
+    <!-- this will show if isLoading is true -->
+    <div v-show="isLoading" class="products-list__loading">Loading...</div>
 
-    <ul v-show="!isLoading">
-        <li v-for="product in products" :key="product.id">
+    <ul v-show="!isLoading" class="products-list">
+        <li v-for="product in filteredProducts()" :key="product.id" class="products-list__item">
             <Card :product="product" />
         </li>
     </ul>
@@ -18,22 +19,36 @@ export default defineComponent({
     data() {
         return {
             products: [] as Product[],
-            isLoading: true,
+            isLoading: true, // to show loading if the products is still being fetched
         };
     },
     components: {
         Card
+    },
+
+    props: {
+        search: {
+            type: String,
+            required: true
+        }
     },
     // This will fetch data on mounting the component
     async mounted() {
         this.products = await fetchData()
         this.isLoading = !this.isLoading
     },
+
+    methods: {
+        //this will return filtered products which is equal to search value and will be looped over in line 5
+        filteredProducts() {
+            return this.products.filter(product => product.title.toLowerCase().includes(this.search.toLowerCase()))
+        }
+    }
 })
 </script>
 
 <style scoped>
-ul {
+.products-list {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -47,7 +62,7 @@ ul {
     justify-content: center;
 }
 
-ul li {
+.products-list__item {
     width: 300px;
     height: 400px;
 
@@ -56,7 +71,6 @@ ul li {
     flex-direction: column;
 
     border: 8px solid black;
-
 
     padding: 1rem;
     border-radius: 8px;

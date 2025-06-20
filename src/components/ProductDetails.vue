@@ -1,32 +1,3 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import type { Product } from '../data/Products';
-
-const route = useRoute();
-const productId = route.params.id;
-const product = ref<Product | null>(null);
-const loading = ref(true);
-const error = ref('');
-
-async function fetchProductById(id: string | string[]) {
-    try {
-        loading.value = true;
-        const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-        if (!res.ok) throw new Error('Failed to fetch product');
-        product.value = await res.json();
-    } catch (err: any) {
-        error.value = err.message || 'Unknown error';
-    } finally {
-        loading.value = false;
-    }
-}
-
-onMounted(() => {
-    fetchProductById(productId);
-});
-</script>
-
 <template>
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">Error: {{ error }}</div>
@@ -39,6 +10,38 @@ onMounted(() => {
         <p><strong>Rating:</strong> {{ product.rating?.rate }} ({{ product.rating?.count }} reviews)</p>
     </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import type { Product } from '../data/Products';
+
+export default defineComponent({
+    data() {
+        return {
+            product: null as Product | null,
+            loading: true,
+            error: ''
+        };
+    },
+
+
+    // used mounted to run automatically when the comp. renders
+    async mounted() {
+        const id = this.$route.params.id; // gets the id from the url
+        // used try, catch and finally for better handeling
+        try {
+            this.loading = true;
+            const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+            if (!res.ok) throw new Error('Failed to fetch product');
+            this.product = await res.json();
+        } catch (err: any) {
+            this.error = err.message || 'Unknown error';
+        } finally {
+            this.loading = false;
+        }
+    }
+});
+</script>
 
 <style scoped>
 .product-details {

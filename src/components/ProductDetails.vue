@@ -12,7 +12,7 @@
         <p><strong>Category:</strong> {{ product.category }}</p>
         <p><strong>Rating: </strong> <i class="fa-solid fa-star"></i> {{ product.rating?.rate }} ({{
             product.rating?.count
-        }} reviews)</p>
+            }} reviews)</p>
     </div>
     <div v-else>Product not found.</div>
 </template>
@@ -80,7 +80,7 @@ export default defineComponent({
 }
 
 .product-details p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 0.5rem 0;
 }
 </style>

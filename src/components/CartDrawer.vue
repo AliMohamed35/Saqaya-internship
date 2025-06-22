@@ -4,6 +4,7 @@
         <div :class="['cart', { showCart: open }]">
             <h4 class="cart__title">Cart</h4>
             <p>Your cart is empty....</p>
+            <!-- <button>Continue shopping</button> -->
         </div>
     </div>
 </template>
@@ -42,7 +43,8 @@ export default defineComponent({
 
 .cart {
     width: 300px;
-    background-color: blanchedalmond;
+    background-color: white;
+    border-left: 2px solid black;
     height: 100vh;
     position: fixed;
     right: 0;

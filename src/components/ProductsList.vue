@@ -3,7 +3,7 @@
     <div v-show="isLoading" class="products-list__loading">Loading...</div>
 
     <ul v-show="!isLoading" class="products-list">
-        <li v-for="product in filteredProducts()" :key="product.id" class="products-list__item">
+        <li v-for="product in filteredProducts" :key="product.id" class="products-list__item">
             <Card :product="product" />
         </li>
     </ul>
@@ -11,17 +11,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { Product } from '../data/Products';
-import { fetchData } from '../data/Products';
+import type { Product } from '../store/getProducts';
 import Card from './Card.vue';
 
 export default defineComponent({
-    data() {
-        return {
-            products: [] as Product[],
-            isLoading: true, // to show loading if the products is still being fetched
-        };
-    },
     components: {
         Card
     },
@@ -33,14 +26,22 @@ export default defineComponent({
         }
     },
     // This will fetch data on mounting the component
-    async mounted() {
-        this.products = await fetchData()
-        this.isLoading = !this.isLoading
+    mounted() {
+        this.$store.dispatch('fetchData')
     },
 
-    methods: {
+    computed: {
+        products(): Product[] {
+            return this.$store.state.ProductsCall.products
+        },
+        isLoading(): boolean {
+            return this.products.length === 0;
+        },
         //this will return filtered products which is equal to search value and will be looped over in line 5
-        filteredProducts() {
+        filteredProducts(): Product[] {
+            if (!this.products) {
+                return []
+            }
             return this.products.filter(product => product.title.toLowerCase().includes(this.search.toLowerCase()))
         }
     }
@@ -53,26 +54,21 @@ export default defineComponent({
     flex-wrap: wrap;
     list-style: none;
     gap: 2rem;
-
     width: 100%;
-
     padding: 0;
     margin: 0;
-
     justify-content: center;
 }
 
 .products-list__item {
     width: 300px;
     height: 400px;
-
     background-color: white;
     display: flex;
     flex-direction: column;
-
     border: 8px solid black;
-
     padding: 1rem;
     border-radius: 8px;
+    box-shadow: 0px 5px 10px black;
 }
 </style>

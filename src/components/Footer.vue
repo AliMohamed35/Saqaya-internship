@@ -60,7 +60,7 @@ export default defineComponent({
 
 <style scoped>
 .footer {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     min-height: 200px;
     padding: 4rem;
     width: 100%;
@@ -69,6 +69,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    border-top: 3px solid black;
 }
 
 .footer__left-cols {
@@ -102,7 +103,6 @@ export default defineComponent({
 .footer__col-list li {
     margin: .4rem 0;
     font-size: 1.3rem;
-    color: black;
     text-decoration: none;
 }
 
@@ -140,7 +140,14 @@ export default defineComponent({
     display: flex;
     gap: 1rem;
     list-style: none;
+    color: black;
 }
+
+.footer__social-icons a {
+    color: black;
+    font-size: 1.4rem;
+}
+
 
 @media (max-width: 1024px) {
     .footer {

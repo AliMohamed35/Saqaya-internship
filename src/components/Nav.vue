@@ -1,8 +1,6 @@
 <template>
     <header>
         <nav class="nav">
-
-
             <button class="nav__hamburger" @click="toggleNav">
                 <span></span>
                 <span></span>
@@ -22,13 +20,9 @@
             </div>
 
             <div class="nav__logo-mob">Logo</div>
-
             <div class="nav__right-items" style="display: flex; align-items: center;">
-                <a href="#" class="nav__icon-link"><i class="fas fa-search"></i></a>
                 <a href="#" class="nav__signin-link">Sign in</a>
-
                 <CartButton @click="toggleCart" />
-
                 <teleport to="body">
                     <CartDrawer :open="isCartOpen" @close="toggleCart" />
                 </teleport>
@@ -100,12 +94,13 @@ export default defineComponent({
 
 <style scoped>
 .nav {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
     position: relative;
+    border-bottom: 3px solid black;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.109);
 }
 
@@ -171,7 +166,7 @@ export default defineComponent({
 }
 
 .nav__cart-btn {
-    background-color: antiquewhite;
+    background-color: transparent;
     border: none;
     font-size: 1rem;
     cursor: pointer;
@@ -194,7 +189,9 @@ export default defineComponent({
         left: -100%;
         width: 70%;
         height: 100vh;
-        background-color: #e5a34a;
+        background-color: white;
+        border-right: 1px solid black;
+        box-shadow: 0px 5px 10px black;
         flex-direction: column;
         padding: 40px 20px;
         transition: left 0.3s ease;
@@ -209,6 +206,16 @@ export default defineComponent({
         flex-direction: column;
         align-items: center;
         gap: 2rem;
+        width: 100%;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .nav__item {
+        background-color: #00000014;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
     }
 
     .nav__logo {

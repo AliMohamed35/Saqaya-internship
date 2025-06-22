@@ -12,14 +12,14 @@
     </div>
 
     <div class="btns">
-        <button class="btns__button">Add to cart</button>
+        <button class="btns__button" @click="$store.dispatch('fetchData')">Add to cart</button>
         <a class="btns__link" href="#"><router-link :to="`/product/${product.id}`">Details</router-link></a>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue';
-import type { Product } from '../data/Products'
+import type { Product } from '../store/getProducts'
 
 export default defineComponent({
     props: {
@@ -34,9 +34,7 @@ export default defineComponent({
 <style scoped>
 .card__container {
     color: black;
-
     height: 100%;
-
     display: flex;
     flex-direction: column;
 }
@@ -46,14 +44,12 @@ export default defineComponent({
     height: 140px;
     object-fit: contain;
     border-radius: 8px;
-
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .card__container-title {
     font-size: 2rem;
     margin: 1rem 0rem;
-
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -64,9 +60,7 @@ export default defineComponent({
 }
 
 .card__container-price {
-
     font-weight: bold;
-
     font-size: 1.3rem;
 }
 
@@ -74,10 +68,8 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     margin: 1rem 0rem;
     font-weight: bold;
-
     font-size: 1.3rem;
 }
 
@@ -96,7 +88,6 @@ export default defineComponent({
     text-decoration: none !important;
     font-weight: bold;
     font-size: 1.2rem;
-
     color: #ff9e21;
 }
 
@@ -104,11 +95,9 @@ export default defineComponent({
     padding: .5rem 1.3rem;
     background-color: black;
     color: white;
-
     border: none;
     font-size: .9rem;
     font-weight: bold;
-
     cursor: pointer;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.309);
     transition: ease 0.3s;

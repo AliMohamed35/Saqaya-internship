@@ -45,21 +45,18 @@ section {
     font-weight: bold;
     font-size: 2rem;
     margin-bottom: 2rem;
-
-    border-bottom: 2px solid #ff9e21;
+    border-bottom: 2px solid black;
     width: fit-content;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     width: 100%;
 }
 
 .section__search input {
     border-radius: 7px;
     padding: 7px 24px;
-    border: 1px solid rgba(0, 0, 0, 0.375);
+    border: 2px solid black;
     font-size: 1.3rem;
     width: 320px;
     max-width: 100%;

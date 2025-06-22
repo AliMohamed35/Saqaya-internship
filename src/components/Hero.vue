@@ -1,5 +1,5 @@
 <template>
-    <section class="hero__section-container">
+    <section class="hero__section-container" style="border-bottom: 1px solid black">
         <h2>This is the hero section</h2>
     </section>
 
@@ -15,20 +15,15 @@
 
 <style>
 .hero__section-container {
-    background-image: url('/recycled-shoe-store-hero-image-bg.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-color: black;
-    color: white;
-
+    color: black;
     max-width: 80%;
-    min-height: 700px;
+    min-height: 500px;
     margin: 0 auto;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
     text-align: center;
     padding: 2rem;
 }

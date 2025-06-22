@@ -92,7 +92,7 @@
 .contact__input:focus,
 .contact__textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: black;
     background-color: white;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
@@ -109,7 +109,7 @@
 }
 
 .contact__button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: black;
     color: white;
     border: none;
     padding: 1rem 2rem;

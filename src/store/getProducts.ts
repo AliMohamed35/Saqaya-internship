@@ -1,5 +1,3 @@
-// import { Commit } from "vuex";
-
 export interface Product {
     id: number;
     image: string;
@@ -28,7 +26,7 @@ export default ({
         }
     },
     actions: {
-        async fetchData({ commit }: { commit: Commit }): Promise<Product[]> {
+        async fetchData({ commit }: { commit: (type: 'assignProducts', payload: Product[]) => void }): Promise<Product[]> {
             let res = await fetch('https://fakestoreapi.com/products');
             if (!res.ok) throw new Error('failed to fetch data') // error handling
             const products: Product[] = await res.json(); //  convert to json format

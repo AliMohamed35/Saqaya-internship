@@ -12,7 +12,7 @@
         <p><strong>Category:</strong> {{ product.category }}</p>
         <p><strong>Rating: </strong> <i class="fa-solid fa-star"></i> {{ product.rating?.rate }} ({{
             product.rating?.count
-            }} reviews)</p>
+        }} reviews)</p>
     </div>
     <div v-else>Product not found.</div>
 </template>
@@ -71,7 +71,7 @@ export default defineComponent({
 }
 
 .product-details img {
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
 }
 
 .product-details h1 {

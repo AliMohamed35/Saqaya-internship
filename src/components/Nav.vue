@@ -22,7 +22,12 @@
             <div class="nav__logo-mob">Logo</div>
             <div class="nav__right-items" style="display: flex; align-items: center;">
                 <a href="#" class="nav__signin-link">Sign in</a>
-                <CartButton @click="toggleCart" />
+
+                <div style="position: relative; display: inline-block;">
+                    <CartButton @click="toggleCart" />
+                    <span v-if="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+                </div>
+
                 <teleport to="body">
                     <CartDrawer :open="isCartOpen" @close="toggleCart" />
                 </teleport>
@@ -38,6 +43,7 @@ import CartDrawer from './CartDrawer.vue'
 import CartButton from './CartButton.vue'
 
 
+
 export default defineComponent({
     data() {
         return {
@@ -48,7 +54,8 @@ export default defineComponent({
 
     components: {
         CartDrawer,
-        CartButton
+        CartButton,
+
     },
 
     mounted() {
@@ -64,14 +71,6 @@ export default defineComponent({
     methods: {
         toggleNav(): void {
             this.isNavOpen = !this.isNavOpen
-            const navLinks = document.querySelector('.nav-links')
-            if (navLinks) {
-                if (this.isNavOpen) {
-                    navLinks.classList.add('active')
-                } else {
-                    navLinks.classList.remove('active')
-                }
-            }
         },
         toggleCart(): void {
             this.isCartOpen = !this.isCartOpen;
@@ -85,6 +84,12 @@ export default defineComponent({
                     navLinks.classList.remove('active')
                 }
             }
+        }
+    },
+
+    computed: {
+        cartCount(): number {
+            return this.$store.getters['cart/cartItems'].length;
         }
     }
 })
@@ -240,5 +245,23 @@ export default defineComponent({
     .nav__right-items a:not(.nav__icon-link) {
         display: none;
     }
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 </style>

@@ -12,7 +12,7 @@
     </div>
 
     <div class="btns">
-        <button class="btns__button" @click="$store.dispatch('fetchData')">Add to cart</button>
+        <button class="btns__button" @click="addToCart(product)">Add to cart</button>
         <a class="btns__link" href="#"><router-link :to="`/product/${product.id}`">Details</router-link></a>
     </div>
 </template>
@@ -28,6 +28,12 @@ export default defineComponent({
             required: true
         }
     },
+
+    methods: {
+        addToCart(product: Product) {
+            this.$store.dispatch('cart/addProductToCart', product)
+        }
+    }
 })
 </script>
 

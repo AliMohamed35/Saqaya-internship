@@ -22,7 +22,7 @@ export default ({
     mutations: {
         assignProducts(state: State, products: Product[]) {
             state.products = products
-            console.log(products);
+            console.log(products)
         }
     },
     actions: {

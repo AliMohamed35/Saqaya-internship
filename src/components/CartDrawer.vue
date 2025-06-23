@@ -3,7 +3,15 @@
     <div :class="['backdrop', { 'backdrop--visible': open }]" @click.self="$emit('close')">
         <div :class="['cart', { showCart: open }]">
             <h4 class="cart__title">Cart</h4>
-            <p>Your cart is empty....</p>
+            <p v-if="cartItems.length === 0">Your cart is empty....</p>
+
+            <ul>
+                <li v-for="item in cartItems" :key="item.id">
+                    {{ item.title }} - ${{ item.price }} x {{ item.quantity }}
+                    <button @click="removeFromCart(item.id)">Remove</button>
+                </li>
+
+            </ul>
             <!-- <button>Continue shopping</button> -->
         </div>
     </div>
@@ -17,6 +25,19 @@ export default defineComponent({
         open: {
             type: Boolean,
             default: false
+        }
+    },
+    computed: {
+        cartItems() {
+            return this.$store.getters['cart/cartItems']
+        },
+        cartTotal() {
+            return this.$store.getters['cart/cartTotal']
+        }
+    },
+    methods: {
+        removeFromCart(productId: number) {
+            this.$store.dispatch('cart/removeProductFromCart', productId)
         }
     }
 })

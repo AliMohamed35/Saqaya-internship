@@ -68,5 +68,9 @@ section {
         margin-bottom: 1rem;
         border-bottom: none;
     }
+
+    .section__search input {
+        width: 250px;
+    }
 }
 </style>

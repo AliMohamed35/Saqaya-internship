@@ -28,13 +28,17 @@ export default defineComponent({
         };
     },
     computed: {
+        // the purpose of this is to feed data to product computed function 
         products(): Product[] {
-            // checks if the data is already avail. in the store or not
+            // It reaches into Vuex store goes to the state and returns the products array from it.
             return this.$store.state.ProductsCall.products;
         },
         product(): Product | undefined {
+            // This one extracts the id from the url and searches for the product with the same
+            // id in the products array that we just got in the function above
             const id = Number(this.$route.params.id);
             return this.products.find((p: Product) => p.id === id);
+
         },
         isLoading(): boolean {
             return this.products.length === 0 && !this.error;

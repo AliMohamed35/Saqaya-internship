@@ -15,7 +15,7 @@
             <!-- NAVLINKS COMPONENT -->
             <div class="backdrop" v-if="isNavOpen" @click="toggleNav"></div>
             <div class="nav__links" :class="{ 'nav__opened': isNavOpen }">
-                <NavLinks @close="toggleNav" />
+                <NavLinks @close="closeNav" />
             </div>
 
             <!-- CART BUTTON -->
@@ -52,6 +52,9 @@ export default {
         // to toggle Cart on mobile screens
         toggleCart() {
             this.isCartOpen = !this.isCartOpen
+        },
+        closeNav() {
+            this.isNavOpen = false;
         }
     },
     components: {
@@ -59,8 +62,7 @@ export default {
         BurgerMenu,
         CartButton,
         NavLinks
-    }
-
+    },
 }
 </script>
 

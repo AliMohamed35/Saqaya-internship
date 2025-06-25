@@ -30,6 +30,7 @@ export default defineComponent({
     },
 
     methods: {
+        // this method fires the action in store and then action fires mutations which controls the data
         addToCart(product: Product) {
             this.$store.dispatch('cart/addProductToCart', product)
         }

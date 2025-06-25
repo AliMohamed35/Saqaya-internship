@@ -13,7 +13,7 @@
 </script>
 
 
-<style>
+<style scoped>
 .hero__section-container {
     color: black;
     max-width: 80%;

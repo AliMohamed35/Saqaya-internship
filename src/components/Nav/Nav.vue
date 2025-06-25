@@ -9,18 +9,21 @@
             </div>
 
             <!-- LOGO -->
-            <div class="nav__logo">Logo</div>
+            <div class="nav__logo"><router-link to="/">LOGO</router-link></div>
 
 
             <!-- NAVLINKS COMPONENT -->
             <div class="backdrop" v-if="isNavOpen" @click="toggleNav"></div>
-            <div class="nav__links" :class="{ 'nav__opened': isNavOpen }">
-                <NavLinks @close="closeNav" />
-            </div>
+                <NavLinks @close="closeNav" :open="isNavOpen"/>
 
             <!-- CART BUTTON -->
-            <CartButton @click="toggleCart" />
+            <!-- Will add cart length counter -->
+            <div style="position: relative; display: inline-block;">
+                    <CartButton @click="toggleCart" />
+                    <span v-if="cartTotal > 0" class="cart__badge">{{ cartTotal }}</span>
+            </div>
 
+            <!-- CART COMPONENT -->
             <teleport to="body">
                 <CartDrawer :open="isCartOpen" @close="toggleCart" />
             </teleport>
@@ -53,6 +56,7 @@ export default {
         toggleCart() {
             this.isCartOpen = !this.isCartOpen
         },
+        // sets the isNavOpen to false auto after closing the menu.
         closeNav() {
             this.isNavOpen = false;
         }
@@ -63,6 +67,12 @@ export default {
         CartButton,
         NavLinks
     },
+    computed: {
+        // this fetches the total number of items in cart
+        cartTotal() {
+            return this.$store.getters['cart/cartTotal'].length;
+        }
+    }
 }
 </script>
 
@@ -77,10 +87,11 @@ nav {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.nav__logo {
-    font-size: 1.5rem;
+.nav__logo a{
+    font-size: 1.8rem;
     font-weight: bold;
     color: #42b983;
+    text-decoration: none;
 }
 
 .backdrop {
@@ -104,6 +115,24 @@ nav {
     height: 20px;
     padding: 0;
     z-index: 100;
+}
+
+.cart__badge{
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 @media(max-width:768px) {

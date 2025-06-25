@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ProductsList from '../components/ProductsList.vue';
+import ProductsList from '../components/Products/ProductsList.vue';
 
 export default defineComponent({
     components: {

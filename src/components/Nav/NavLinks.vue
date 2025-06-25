@@ -1,11 +1,25 @@
 <template>
-    <ul class=" nav__list">
-        <!-- Each link will toggle the nav bar to close after we click it -->
-        <li class="nav__item"><router-link to="/" @click="$emit('close')">Home</router-link></li>
-        <li class="nav__item"><router-link to="/products" @click="$emit('close')">Products</router-link></li>
-        <li class="nav__item"><router-link to="/contact" @click="$emit('close')">Contact us</router-link></li>
-    </ul>
+    <div class="nav__links" :class="{ 'nav__opened': open }"> 
+        <ul class=" nav__list">
+            <!-- Each link will toggle the nav bar to close after we click it -->
+            <li class="nav__item"><router-link to="/" @click="$emit('close')">Home</router-link></li>
+            <li class="nav__item"><router-link to="/products" @click="$emit('close')">Products</router-link></li>
+            <li class="nav__item"><router-link to="/contact" @click="$emit('close')">Contact us</router-link></li>
+        </ul>
+  </div>
 </template>
+
+<script>
+import  { defineComponent } from 'vue';
+export default defineComponent({
+    props:{
+        open:{
+            type: Boolean,
+            default: false
+        }
+    }
+})
+</script>
 
 <style scoped>
 .nav__list {
@@ -19,8 +33,9 @@
 
 .nav__item a {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
+    color: green;
+    font-weight: bold;
+    font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 

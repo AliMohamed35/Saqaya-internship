@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue';
-import type { Product } from '../store/getProducts'
+import type { Product } from '../../store/getProducts'
 
 export default defineComponent({
     props: {

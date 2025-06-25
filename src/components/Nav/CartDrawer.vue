@@ -3,14 +3,19 @@
     <div :class="['backdrop', { 'backdrop--visible': open }]" @click.self="$emit('close')">
         <div :class="['cart', { showCart: open }]">
             <h4 class="cart__title">Cart</h4>
+
+            <!-- PlaceHolder if the cart is empty -->
             <p v-if="cartItems.length === 0">Your cart is empty....</p>
 
             <ul class="item__list">
+                <!-- LOOPS OVER ITEMS FROM $STORE STATE -->
                 <li class="list__item" v-for="item in cartItems" :key="item.id">
                     <div class="card">
-                    <h3>{{ item.title }}</h3>
-                    <p>Price: ${{ item.price }} x {{ item.quantity }}</p>
-                    <button class="item__button" @click="removeFromCart(item.id)">Remove</button>
+                        <h3>{{ item.title }}</h3>
+                        <p>Price: ${{ item.price }} x {{ item.quantity }}</p>
+
+                        <!-- this function executes the action in store and then the store fires the mutation responsible for the delete -->
+                        <button class="item__button" @click="removeFromCart(item.id)">Remove</button>
                     </div>
                 </li>
 
@@ -30,6 +35,7 @@ export default defineComponent({
         }
     },
     computed: {
+        // gets the cart items stored in cart
         cartItems() {
             return this.$store.getters['cart/cartItems']
         },
@@ -70,6 +76,7 @@ export default defineComponent({
     border-left: 2px solid black;
     height: 100vh;
     position: fixed;
+    overflow: scroll;
     right: 0;
     padding: 20px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
@@ -91,19 +98,19 @@ export default defineComponent({
     transform: translateX(0);
 }
 
-.item__list{
+.item__list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.list__item{
+.list__item {
     padding: 10px;
     border: 2px solid black;
     margin-bottom: 1rem;
 }
 
-.item__button{
+.item__button {
     width: 100%;
     margin-top: 1rem;
     padding: 10px;
@@ -112,6 +119,4 @@ export default defineComponent({
     font-weight: bold;
     font-size: 1rem;
 }
-
-
 </style>

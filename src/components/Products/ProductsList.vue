@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { Product } from '../store/getProducts';
+import type { Product } from '../../store/getProducts';
 import Card from './Card.vue';
 
 export default defineComponent({

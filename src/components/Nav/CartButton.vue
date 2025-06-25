@@ -8,3 +8,12 @@ import { defineComponent } from 'vue';
 export default defineComponent({
 })
 </script>
+
+<style>
+button{
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+</style>

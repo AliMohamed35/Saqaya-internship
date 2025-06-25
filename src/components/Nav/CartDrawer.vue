@@ -5,14 +5,16 @@
             <h4 class="cart__title">Cart</h4>
             <p v-if="cartItems.length === 0">Your cart is empty....</p>
 
-            <ul>
-                <li v-for="item in cartItems" :key="item.id">
-                    {{ item.title }} - ${{ item.price }} x {{ item.quantity }}
-                    <button @click="removeFromCart(item.id)">Remove</button>
+            <ul class="item__list">
+                <li class="list__item" v-for="item in cartItems" :key="item.id">
+                    <div class="card">
+                    <h3>{{ item.title }}</h3>
+                    <p>Price: ${{ item.price }} x {{ item.quantity }}</p>
+                    <button class="item__button" @click="removeFromCart(item.id)">Remove</button>
+                    </div>
                 </li>
 
             </ul>
-            <!-- <button>Continue shopping</button> -->
         </div>
     </div>
 </template>
@@ -43,7 +45,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 .backdrop {
     position: fixed;
     top: 0;
@@ -81,10 +83,35 @@ export default defineComponent({
 }
 
 .cart p {
-    font-size: 1.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
 }
 
 .cart.showCart {
     transform: translateX(0);
 }
+
+.item__list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list__item{
+    padding: 10px;
+    border: 2px solid black;
+    margin-bottom: 1rem;
+}
+
+.item__button{
+    width: 100%;
+    margin-top: 1rem;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+
 </style>

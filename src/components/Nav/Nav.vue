@@ -14,13 +14,13 @@
 
             <!-- NAVLINKS COMPONENT -->
             <div class="backdrop" v-if="isNavOpen" @click="toggleNav"></div>
-                <NavLinks @close="closeNav" :open="isNavOpen"/>
+            <NavLinks @close="closeNav" :open="isNavOpen" />
 
             <!-- CART BUTTON -->
             <!-- Will add cart length counter -->
             <div style="position: relative; display: inline-block;">
-                    <CartButton @click="toggleCart" />
-                    <span v-if="cartTotal > 0" class="cart__badge">{{ cartTotal }}</span>
+                <CartButton @click="toggleCart" />
+                <span v-if="cartTotal >= 0" class="cart__badge">{{ cartTotal }}</span>
             </div>
 
             <!-- CART COMPONENT -->
@@ -70,7 +70,7 @@ export default {
     computed: {
         // this fetches the total number of items in cart
         cartTotal() {
-            return this.$store.getters['cart/cartTotal'].length;
+            return this.$store.getters['cart/cartItems'].length;
         }
     }
 }
@@ -87,7 +87,7 @@ nav {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.nav__logo a{
+.nav__logo a {
     font-size: 1.8rem;
     font-weight: bold;
     color: #42b983;
@@ -117,7 +117,7 @@ nav {
     z-index: 100;
 }
 
-.cart__badge{
+.cart__badge {
     position: absolute;
     top: -8px;
     right: -8px;

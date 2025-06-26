@@ -9,12 +9,12 @@
             <p>{{ product.category }}</p>
         </div>
 
+        <div class="btns">
+            <button class="btns__button" @click="addToCart(product)">Add to cart</button>
+            <a class="btns__link" href="#"><router-link :to="`/product/${product.id}`">Details</router-link></a>
+        </div>
     </div>
 
-    <div class="btns">
-        <button class="btns__button" @click="addToCart(product)">Add to cart</button>
-        <a class="btns__link" href="#"><router-link :to="`/product/${product.id}`">Details</router-link></a>
-    </div>
 </template>
 
 <script lang="ts">
@@ -31,7 +31,7 @@ export default defineComponent({
 
     methods: {
         // this method fires the action in store and then action fires mutations which controls the data
-        addToCart(product: Product) {
+        addToCart(this: any, product: Product) {
             this.$store.dispatch('cart/addProductToCart', product)
         }
     }

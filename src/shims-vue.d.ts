@@ -16,3 +16,13 @@ declare module '@vue/runtime-core' {
         $route: RouteLocationNormalizedLoaded;
     }
 }
+
+declare module 'vuex' {
+    export * from 'vuex/types'
+    export { createStore, useStore, Commit, ActionContext } from 'vuex/types'
+}
+
+declare module 'vuex/dist/vuex.mjs' {
+    export * from 'vuex/types'
+    export { createStore, useStore, Commit, ActionContext } from 'vuex/types'
+}

@@ -35,7 +35,7 @@ export default defineComponent({
             return this.$store.state.ProductsCall.products
         },
         isLoading(): boolean {
-            return this.products.length === 0;
+            return !this.products || this.products.length === 0;
         },
         //this will return filtered products which is equal to search value and will be looped over in line 5
         filteredProducts(): Product[] {

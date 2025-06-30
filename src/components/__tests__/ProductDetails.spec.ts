@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import ProductDetails from '../Products/ProductDetails.vue'
-import { Product } from '../../store/getProducts'
+import type { Product } from '../../store/getProducts'
 
 const createMockStore = (products: Product[], error: string | null = null) => ({
     state: {

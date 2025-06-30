@@ -1,10 +1,23 @@
 {
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+    "extends": "@vue/tsconfig/tsconfig.json",
+    "compilerOptions": {
+        "composite": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        }
     },
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "auto-imports.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }

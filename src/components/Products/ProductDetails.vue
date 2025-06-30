@@ -12,14 +12,14 @@
         <p><strong>Category:</strong> {{ product.category }}</p>
         <p><strong>Rating: </strong> <i class="fa-solid fa-star"></i> {{ product.rating?.rate }} ({{
             product.rating?.count
-        }} reviews)</p>
+            }} reviews)</p>
     </div>
     <div v-else>Product not found.</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { Product } from '../../store/getProducts';
+import { Product } from '../../store/getProducts';
 
 export default defineComponent({
     data() {

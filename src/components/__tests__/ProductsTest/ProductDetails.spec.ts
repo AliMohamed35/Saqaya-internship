@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import ProductDetails from '../Products/ProductDetails.vue'
-import type { Product } from '../../store/getProducts'
+import ProductDetails from '../../Products/ProductDetails.vue'
+import type { Product } from '../../../store/getProducts'
 
 const createMockStore = (products: Product[], error: string | null = null) => ({
     state: {
@@ -30,11 +30,12 @@ const mockProduct: Product = {
     }
 };
 
-describe('ProductDetails.vue', () => {
+describe('Tests the expected from ProductDetails component', () => {
     it('renders loading state initially', () => {
         const wrapper = mount(ProductDetails, {
             global: {
                 mocks: {
+                    // mocks the store [] >> means the mock store will contain empty array of objects
                     $store: createMockStore([]),
                     $route: {
                         params: { id: '1' }

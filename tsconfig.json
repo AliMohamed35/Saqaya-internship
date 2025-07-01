@@ -7,7 +7,14 @@
             "@/*": [
                 "./src/*"
             ]
-        }
+        },
+        "moduleResolution": "node",
+        "target": "esnext",
+        "module": "esnext",
+        "types": [
+            "node",
+            "vue"
+        ]
     },
     "include": [
         "src/**/*.ts",

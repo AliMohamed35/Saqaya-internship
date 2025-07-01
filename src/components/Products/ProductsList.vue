@@ -32,17 +32,18 @@ export default defineComponent({
 
     computed: {
         products(): Product[] {
-            return this.$store.state.ProductsCall.products
+            return this.$store.state.ProductsCall.products as Product[];
         },
         isLoading(): boolean {
             return this.products.length === 0;
         },
-        //this will return filtered products which is equal to search value and will be looped over in line 5
         filteredProducts(): Product[] {
             if (!this.products) {
-                return []
+                return [];
             }
-            return this.products.filter(product => product.title.toLowerCase().includes(this.search.toLowerCase()))
+            return this.products.filter((product: Product) =>
+                product.title.toLowerCase().includes(this.search.toLowerCase())
+            );
         }
     }
 })

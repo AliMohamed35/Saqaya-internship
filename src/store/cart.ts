@@ -22,7 +22,7 @@ export default {
       if (item) {
         item.quantity++;
       } else {
-        state.cart.push({ ...product, quantity: 1 });
+        state.cart.push({ ...product, quantity: 1, price: product.price });
       }
 
       localStorage.setItem("cart", JSON.stringify(state.cart));

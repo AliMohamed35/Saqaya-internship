@@ -12,7 +12,8 @@
                 <li class="list__item" v-for="item in cartItems" :key="item.id">
                     <div class="card">
                         <h3>{{ item.title }}</h3>
-                        <p>Price: ${{ item.price }} x {{ item.quantity }}</p>
+                        <p>x {{ item.quantity }}</p>
+                        <p>Price: ${{ (item.price * item.quantity).toFixed(2) }}</p>
 
                         <!-- this function executes the action in store and then the store fires the mutation responsible for the delete -->
                         <button class="item__button" @click="removeFromCart(item.id)">Remove</button>

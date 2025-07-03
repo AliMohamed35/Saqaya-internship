@@ -1,3 +1,38 @@
+<script lang="ts" setup>
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+import type { Product } from '../../store/getProducts'
+
+// Hooks
+const store = useStore();
+const route = useRoute();
+const error = ref('');
+
+// Calling products from store
+const products = computed<Product[]>(() => store.state.ProductsCall.products);
+
+// filtering the selected product details to show
+const product  = computed<Product | undefined>(()=>{
+    const id = Number(route.params.id)
+    return products.value.find((p: Product)=> p.id === id);
+})
+
+// showing loading state when there isn't products in cart
+const isLoading = computed(()=> products.value.length === 0 && !error.value);
+
+// performing API call to fetch products once the component is rendered
+onMounted(async()=>{
+    if(products.value.length === 0){
+        try{
+            await store.dispatch('fetchData');
+        } catch (error: any){
+            error.value = error.message || 'Unknown error'
+        }
+    }
+})
+</script>
+
 <template>
     <div v-if="isLoading">Loading...</div>
     <div v-else-if="error">Error: {{ error }}</div>
@@ -17,44 +52,6 @@
     <div v-else>Product not found.</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import type { Product } from '../../store/getProducts';
-
-export default defineComponent({
-    data() {
-        return {
-            error: ''
-        };
-    },
-    computed: {
-        // the purpose of this is to feed data to product computed function 
-        products(): Product[] {
-            // It reaches into Vuex store goes to the state and returns the products array from it.
-            return this.$store.state.ProductsCall.products;
-        },
-        product(): Product | undefined {
-            // This one extracts the id from the url and searches for the product with the same
-            // id in the products array that we just got in the function above
-            const id = Number(this.$route.params.id);
-            return this.products.find((p: Product) => p.id === id);
-
-        },
-        isLoading(): boolean {
-            return this.products.length === 0 && !this.error;
-        }
-    },
-    async created() {
-        if (this.products.length === 0) {
-            try {
-                await this.$store.dispatch('fetchData');
-            } catch (err: any) {
-                this.error = err.message || 'Unknown error';
-            }
-        }
-    }
-});
-</script>
 
 <style scoped>
 .product-details {

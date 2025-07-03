@@ -1,42 +1,37 @@
+<script lang="ts" setup>
+import { useStore } from 'vuex';
+import type { Product } from '../../store/getProducts'
+
+// define props
+const props = defineProps<{ product: Product }>();
+// define store
+const store = useStore();
+
+// add to cart function which dispatches a function in the store to add the product to cart
+function addToCart(product: Product) {
+    store.dispatch('cart/addProductToCart', product);
+}
+</script>
+
 <template>
     <div class="card__container">
-        <img :src="product.image" :alt="product.description">
-        <h3 class="card__container-title">{{ product.title }}</h3>
-        <p class="card__container-price">$ {{ product.price }}</p>
+        <img :src="props.product.image" :alt="props.product.description">
+        <h3 class="card__container-title">{{ props.product.title }}</h3>
+        <p class="card__container-price">$ {{ props.product.price }}</p>
 
         <div class="card__container-rating">
-            <p class="card__container-rating--rate"><i class="fa-solid fa-star"></i> {{ product.rating.rate }}</p>
-            <p>{{ product.category }}</p>
+            <p class="card__container-rating--rate"><i class="fa-solid fa-star"></i> {{ props.product.rating.rate }}</p>
+            <p>{{ props.product.category }}</p>
         </div>
 
         <div class="btns">
-            <button class="btns__button" @click="addToCart(product)">Add to cart</button>
-            <a class="btns__link" href="#"><router-link :to="`/product/${product.id}`">Details</router-link></a>
+            <button class="btns__button" @click="addToCart(props.product)">Add to cart</button>
+            <a class="btns__link" href="#"><router-link :to="`/product/${props.product.id}`">Details</router-link></a>
         </div>
     </div>
 
 </template>
 
-<script lang="ts">
-import { defineComponent, type PropType } from 'vue';
-import type { Product } from '../../store/getProducts'
-
-export default defineComponent({
-    props: {
-        product: {
-            type: Object as PropType<Product>,
-            required: true
-        }
-    },
-
-    methods: {
-        // this method fires the action in store and then action fires mutations which controls the data
-        addToCart(this: any, product: Product) {
-            this.$store.dispatch('cart/addProductToCart', product)
-        }
-    }
-})
-</script>
 
 <style scoped>
 .card__container {

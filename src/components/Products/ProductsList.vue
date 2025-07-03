@@ -1,3 +1,33 @@
+<script lang="ts" setup>
+import { computed, onMounted } from 'vue';
+import type { Product } from '../../store/getProducts';
+import Card from './Card.vue';
+import { useStore } from 'vuex';
+
+// define the props
+const props = defineProps<{
+    search: string
+}>()
+
+const store = useStore();
+
+// once the component mount execute the api call
+onMounted(() => {
+    store.dispatch('fetchData');
+})
+
+// API call
+const products = computed<Product[]>(() => store.state.ProductsCall.products)
+
+// track products length to show loader
+const isLoading = computed(() => products.value.length === 0)
+
+// filtering products to use the search feature
+const filteredProducts = computed(() => products.value.filter((product: Product) => product.title.toLowerCase().includes(props.search.toLowerCase())));
+
+</script>
+
+
 <template>
     <!-- this will show if isLoading is true -->
     <div v-show="isLoading" class="products-list__loading">Loading...</div>
@@ -9,45 +39,6 @@
     </ul>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import type { Product } from '../../store/getProducts';
-import Card from './Card.vue';
-
-export default defineComponent({
-    components: {
-        Card
-    },
-
-    props: {
-        search: {
-            type: String,
-            required: true
-        }
-    },
-    // This will fetch data on mounting the component
-    mounted() {
-        this.$store.dispatch('fetchData')
-    },
-
-    computed: {
-        products(): Product[] {
-            return this.$store.state.ProductsCall.products as Product[];
-        },
-        isLoading(): boolean {
-            return this.products.length === 0;
-        },
-        filteredProducts(): Product[] {
-            if (!this.products) {
-                return [];
-            }
-            return this.products.filter((product: Product) =>
-                product.title.toLowerCase().includes(this.search.toLowerCase())
-            );
-        }
-    }
-})
-</script>
 
 <style scoped>
 .products-list {

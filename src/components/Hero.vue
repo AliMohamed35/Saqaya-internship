@@ -2,16 +2,7 @@
     <section class="hero__section-container" style="border-bottom: 1px solid black">
         <h2>This is the hero section</h2>
     </section>
-
-    <!-- <section class="section__container">
-        <h2>This is the best seller section</h2>
-    </section> -->
 </template>
-
-<script>
-
-</script>
-
 
 <style scoped>
 .hero__section-container {

@@ -1,6 +1,38 @@
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+// Define props
+const props = defineProps<{
+    open: boolean;
+}>();
+
+// Define emits
+const emit = defineEmits<{
+    close: [];
+}>();
+
+// Get store instance
+const store = useStore();
+
+// Computed properties
+const cartItems = computed(() => {
+    return store.getters['cart/cartItems'];
+});
+
+const cartTotal = computed(() => {
+    return store.getters['cart/cartTotal'];
+});
+
+// Methods
+const removeFromCart = (productId: number) => {
+    store.dispatch('cart/removeProductFromCart', productId);
+};
+</script>
+
 <template>
     <!-- backdrop is always applied to the div but backdrop--visible will only apply if open is true-->
-    <div :class="['backdrop', { 'backdrop--visible': open }]" @click.self="$emit('close')">
+    <div :class="['backdrop', { 'backdrop--visible': open }]" @click.self="emit('close')">
         <div :class="['cart', { showCart: open }]">
             <h4 class="cart__title">Cart</h4>
 
@@ -24,33 +56,6 @@
         </div>
     </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    props: {
-        open: {
-            type: Boolean,
-            default: false
-        }
-    },
-    computed: {
-        // gets the cart items stored in cart
-        cartItems() {
-            return this.$store.getters['cart/cartItems']
-        },
-        cartTotal() {
-            return this.$store.getters['cart/cartTotal']
-        }
-    },
-    methods: {
-        removeFromCart(productId: number) {
-            this.$store.dispatch('cart/removeProductFromCart', productId)
-        }
-    }
-})
-</script>
 
 <style scoped>
 .backdrop {

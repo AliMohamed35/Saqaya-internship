@@ -26,7 +26,7 @@ function addToCart(product: Product) {
 
         <div class="btns">
             <button class="btns__button" @click="addToCart(props.product)">Add to cart</button>
-            <a class="btns__link" href="#"><router-link :to="`/product/${props.product.id}`">Details</router-link></a>
+            <router-link class="btns__link" :to="`/product/${props.product.id}`">Details</router-link>
         </div>
     </div>
 

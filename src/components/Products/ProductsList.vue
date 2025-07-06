@@ -23,7 +23,19 @@ const products = computed<Product[]>(() => store.state.ProductsCall.products)
 const isLoading = computed(() => products.value.length === 0)
 
 // filtering products to use the search feature
-const filteredProducts = computed(() => products.value.filter((product: Product) => product.title.toLowerCase().includes(props.search.toLowerCase())));
+const filteredProducts = computed(() => {
+    // If search is empty or only whitespace, return all products
+    if (!props.search || props.search.trim() === '') {
+        return products.value;
+    }
+
+    const searchTerm = props.search.toLowerCase().trim();
+
+    return products.value.filter((product: Product) =>
+        product.title.toLowerCase().includes(searchTerm) ||
+        product.category.toLowerCase().includes(searchTerm)
+    );
+});
 
 </script>
 

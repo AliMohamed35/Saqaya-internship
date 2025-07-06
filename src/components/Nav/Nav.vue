@@ -1,3 +1,37 @@
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
+import BurgerMenu from './BurgerMenu.vue';
+import CartDrawer from './CartDrawer.vue';
+import CartButton from './CartButton.vue';
+import NavLinks from './NavLinks.vue';
+
+// Store instance
+const store = useStore();
+
+// Reactive data
+const isNavOpen = ref(false);
+const isCartOpen = ref(false);
+
+// Methods
+const toggleNav = () => {
+    isNavOpen.value = !isNavOpen.value;
+};
+
+const toggleCart = () => {
+    isCartOpen.value = !isCartOpen.value;
+};
+
+const closeNav = () => {
+    isNavOpen.value = false;
+};
+
+// Computed properties
+const cartTotal = computed(() => {
+    return store.getters['cart/cartItems'].length;
+});
+</script>
+
 <template>
 
     <header>
@@ -32,49 +66,6 @@
 
 </template>
 
-<script>
-import BurgerMenu from './BurgerMenu.vue';
-import CartDrawer from './CartDrawer.vue'
-import CartButton from './CartButton.vue'
-import NavLinks from './NavLinks.vue';
-
-export default {
-    data() {
-
-        // to control opening and closing for Nav and Cart
-        return {
-            isNavOpen: false,
-            isCartOpen: false,
-        }
-    },
-    methods: {
-        // to toggle the Nav bar on mobile screens
-        toggleNav() {
-            this.isNavOpen = !this.isNavOpen
-        },
-        // to toggle Cart on mobile screens
-        toggleCart() {
-            this.isCartOpen = !this.isCartOpen
-        },
-        // sets the isNavOpen to false auto after closing the menu.
-        closeNav() {
-            this.isNavOpen = false;
-        }
-    },
-    components: {
-        CartDrawer,
-        BurgerMenu,
-        CartButton,
-        NavLinks
-    },
-    computed: {
-        // this fetches the total number of items in cart
-        cartTotal() {
-            return this.$store.getters['cart/cartItems'].length;
-        }
-    }
-}
-</script>
 
 
 <style scoped>

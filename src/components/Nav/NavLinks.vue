@@ -1,24 +1,18 @@
 <template>
-    <div class="nav__links" :class="{ 'nav__opened': open }"> 
+    <div class="nav__links" :class="{ 'nav__opened': open }">
         <ul class=" nav__list">
             <!-- Each link will toggle the nav bar to close after we click it -->
             <li class="nav__item"><router-link to="/" @click="$emit('close')">Home</router-link></li>
             <li class="nav__item"><router-link to="/products" @click="$emit('close')">Products</router-link></li>
             <li class="nav__item"><router-link to="/contact" @click="$emit('close')">Contact us</router-link></li>
         </ul>
-  </div>
+    </div>
 </template>
 
-<script>
-import  { defineComponent } from 'vue';
-export default defineComponent({
-    props:{
-        open:{
-            type: Boolean,
-            default: false
-        }
-    }
-})
+<script lang="ts" setup>
+const props = defineProps<{
+    open: boolean;
+}>();
 </script>
 
 <style scoped>

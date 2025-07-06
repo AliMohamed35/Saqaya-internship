@@ -8,33 +8,37 @@ import type { Product } from '../../store/getProducts'
 const store = useStore();
 const route = useRoute();
 const error = ref('');
+const isLoading = ref(false);
 
 // Calling products from store
 const products = computed<Product[]>(() => store.state.ProductsCall.products);
 
 // filtering the selected product details to show
-const product  = computed<Product | undefined>(()=>{
+const product = computed<Product | undefined>(() => {
     const id = Number(route.params.id)
-    return products.value.find((p: Product)=> p.id === id);
+    return products.value.find((p: Product) => p.id === id);
 })
 
 // showing loading state when there isn't products in cart
-const isLoading = computed(()=> products.value.length === 0 && !error.value);
+const showLoading = computed(() => isLoading.value && !error.value);
 
 // performing API call to fetch products once the component is rendered
-onMounted(async()=>{
-    if(products.value.length === 0){
-        try{
+onMounted(async () => {
+    if (products.value.length === 0) {
+        isLoading.value = true;
+        try {
             await store.dispatch('fetchData');
-        } catch (error: any){
-            error.value = error.message || 'Unknown error'
+        } catch (err: any) {
+            error.value = err.message || 'Unknown error'
+        } finally {
+            isLoading.value = false;
         }
     }
 })
 </script>
 
 <template>
-    <div v-if="isLoading">Loading...</div>
+    <div v-if="showLoading">Loading...</div>
     <div v-else-if="error">Error: {{ error }}</div>
     <div v-else-if="product" class="product-details">
         <div class="product__details-image">
@@ -47,7 +51,7 @@ onMounted(async()=>{
         <p><strong>Category:</strong> {{ product.category }}</p>
         <p><strong>Rating: </strong> <i class="fa-solid fa-star"></i> {{ product.rating?.rate }} ({{
             product.rating?.count
-        }} reviews)</p>
+            }} reviews)</p>
     </div>
     <div v-else>Product not found.</div>
 </template>

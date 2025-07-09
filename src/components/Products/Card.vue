@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import { useStore } from 'vuex';
-import type { Product } from '../../store/getProducts'
+import type { Product } from '../../store/getProducts';
+import { useCartStore } from '../../store/cart';
 
 // define props
 const props = defineProps<{ product: Product }>();
-// define store
-const store = useStore();
 
-// add to cart function which dispatches a function in the store to add the product to cart
+const cartStore = useCartStore();
+
+// add to cart function which uses Pinia store action
 function addToCart(product: Product) {
-    store.dispatch('cart/addProductToCart', product);
+    cartStore.addProductToCart(product);
 }
 </script>
 

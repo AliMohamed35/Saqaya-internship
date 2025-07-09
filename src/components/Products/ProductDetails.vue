@@ -1,33 +1,31 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import type { Product } from '../../store/getProducts'
+import { useProductsStore, type Product } from '../../store/getProducts'
 
 // Hooks
-const store = useStore();
 const route = useRoute();
 const error = ref('');
 const isLoading = ref(false);
 
 // Calling products from store
-const products = computed<Product[]>(() => store.state.ProductsCall.products);
+const productsStore = useProductsStore();
 
 // filtering the selected product details to show
 const product = computed<Product | undefined>(() => {
     const id = Number(route.params.id)
-    return products.value.find((p: Product) => p.id === id);
+    return productsStore.products.find((p: Product) => p.id === id);
 })
 
-// showing loading state when there isn't products in cart
+// showing loading state when there isn't products in store
 const showLoading = computed(() => isLoading.value && !error.value);
 
 // performing API call to fetch products once the component is rendered
 onMounted(async () => {
-    if (products.value.length === 0) {
+    if (productsStore.products.length === 0) {
         isLoading.value = true;
         try {
-            await store.dispatch('fetchData');
+            await productsStore.fetchData();
         } catch (err: any) {
             error.value = err.message || 'Unknown error'
         } finally {
@@ -51,7 +49,7 @@ onMounted(async () => {
         <p><strong>Category:</strong> {{ product.category }}</p>
         <p><strong>Rating: </strong> <i class="fa-solid fa-star"></i> {{ product.rating?.rate }} ({{
             product.rating?.count
-            }} reviews)</p>
+        }} reviews)</p>
     </div>
     <div v-else>Product not found.</div>
 </template>

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useCartStore } from '../../store/cart';
 
 // Define props
-const props = defineProps<{
+defineProps<{
     open: boolean;
 }>();
 
@@ -12,21 +12,17 @@ const emit = defineEmits<{
     close: [];
 }>();
 
-// Get store instance
-const store = useStore();
+// Pinia cart store instance
+const cartStore = useCartStore();
 
 // Computed properties
 const cartItems = computed(() => {
-    return store.getters['cart/cartItems'];
-});
-
-const cartTotal = computed(() => {
-    return store.getters['cart/cartTotal'];
+    return cartStore.cartItems;
 });
 
 // Methods
 const removeFromCart = (productId: number) => {
-    store.dispatch('cart/removeProductFromCart', productId);
+    cartStore.removeProductFromCart(productId);
 };
 </script>
 

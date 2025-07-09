@@ -1,3 +1,5 @@
+import { defineStore } from "pinia";
+
 export interface Product {
   id: number;
   image: string;
@@ -15,25 +17,16 @@ interface State {
   products: Product[];
 }
 
-export default {
-  state: {
+export const useProductsStore = defineStore("products", {
+  state: (): State => ({
     products: [],
-  } as State,
-  mutations: {
-    assignProducts(state: State, products: Product[]) {
-      state.products = products;
-    },
-  },
+  }),
   actions: {
-    async fetchData({
-      commit,
-    }: {
-      commit: (type: "assignProducts", payload: Product[]) => void;
-    }) {
+    async fetchData() {
       let res = await fetch("https://fakestoreapi.com/products");
-      if (!res.ok) throw new Error("failed to fetch data"); // error handling
-      const products: Product[] = await res.json(); //  convert to json format
-      commit("assignProducts", products);
+      if (!res.ok) throw new Error("failed to fetch data");
+      const products: Product[] = await res.json();
+      this.products = products;
     },
   },
-};
+});

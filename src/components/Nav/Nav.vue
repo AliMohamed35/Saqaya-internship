@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { useStore } from 'vuex';
+import { useCartStore } from '../../store/cart';
 import BurgerMenu from './BurgerMenu.vue';
 import CartDrawer from './CartDrawer.vue';
 import CartButton from './CartButton.vue';
 import NavLinks from './NavLinks.vue';
 
-// Store instance
-const store = useStore();
+// Pinia cart store instance
+const cartStore = useCartStore();
 
 // Reactive data
 const isNavOpen = ref(false);
@@ -18,17 +18,19 @@ const toggleNav = () => {
     isNavOpen.value = !isNavOpen.value;
 };
 
+// toggles the cart to close or open
 const toggleCart = () => {
     isCartOpen.value = !isCartOpen.value;
 };
 
+// closes the navBar whenever any nav link is pressed
 const closeNav = () => {
     isNavOpen.value = false;
 };
 
-// Computed properties
+// fetches the added products from Pinia store state to render in the cart
 const cartTotal = computed(() => {
-    return store.getters['cart/cartItems'].length;
+    return cartStore.cartItems.length;
 });
 </script>
 
@@ -65,7 +67,6 @@ const cartTotal = computed(() => {
     </header>
 
 </template>
-
 
 
 <style scoped>

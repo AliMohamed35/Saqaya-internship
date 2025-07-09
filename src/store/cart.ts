@@ -1,3 +1,4 @@
+import { defineStore } from "pinia";
 import type { Product } from "./getProducts";
 
 interface CartItem extends Product {
@@ -8,62 +9,45 @@ interface CartState {
   cart: CartItem[];
 }
 
-export default {
-  namespaced: true,
-
-  state: {
+export const useCartStore = defineStore("cart", {
+  state: (): CartState => ({
     cart: JSON.parse(localStorage.getItem("cart") || "[]"),
-  } as CartState,
-
-  mutations: {
-    addToCart(state: CartState, product: Product) {
-      const item = state.cart.find((item) => item.id == product.id);
-
+  }),
+  actions: {
+    addToCart(product: Product) {
+      const item = this.cart.find((item) => item.id == product.id);
       if (item) {
         item.quantity++;
       } else {
-        state.cart.push({ ...product, quantity: 1, price: product.price });
+        this.cart.push({ ...product, quantity: 1, price: product.price });
       }
-
-      localStorage.setItem("cart", JSON.stringify(state.cart));
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
-    removeFromCart(state: CartState, productId: string | number) {
-      const item = state.cart.find((item) => item.id == productId);
+    removeFromCart(productId: string | number) {
+      const item = this.cart.find((item) => item.id == productId);
       if (item) {
         if (item.quantity > 1) {
           item.quantity--;
         } else {
-          state.cart = state.cart.filter((item) => item.id !== productId);
+          this.cart = this.cart.filter((item) => item.id !== productId);
         }
-        localStorage.setItem("cart", JSON.stringify(state.cart));
+        localStorage.setItem("cart", JSON.stringify(this.cart));
       }
     },
-    clearState(state: CartState) {
-      state.cart = [];
-      localStorage.removeItem("cart");
+    addProductToCart(product: Product) {
+      this.addToCart(product);
     },
-  },
-  actions: {
-    addProductToCart(
-      { commit }: { commit: (type: string, payload: any) => void },
-      product: Product
-    ) {
-      commit("addToCart", product);
-    },
-    removeProductFromCart(
-      { commit }: { commit: (type: string, payload: any) => void },
-      productId: string | number
-    ) {
-      commit("removeFromCart", productId);
+    removeProductFromCart(productId: string | number) {
+      this.removeFromCart(productId);
     },
   },
   getters: {
-    cartItems: (state: CartState) => state.cart,
-    cartTotal: (state: CartState) => {
+    cartItems: (state) => state.cart,
+    cartTotal: (state) => {
       return state.cart.reduce(
         (total: number, item: CartItem) => total + item.price * item.quantity,
         0
       );
     },
   },
-};
+});

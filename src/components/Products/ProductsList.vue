@@ -2,22 +2,22 @@
 import { computed, onMounted } from 'vue';
 import type { Product } from '../../store/getProducts';
 import Card from './Card.vue';
-import { useStore } from 'vuex';
+import { useProductsStore } from '../../store/getProducts';
 
 // define the props
 const props = defineProps<{
     search: string
 }>()
 
-const store = useStore();
+const productsStore = useProductsStore();
 
 // once the component mount execute the api call
 onMounted(() => {
-    store.dispatch('fetchData');
+    productsStore.fetchData();
 })
 
 // API call
-const products = computed<Product[]>(() => store.state.ProductsCall.products)
+const products = computed<Product[]>(() => productsStore.products)
 
 // track products length to show loader
 const isLoading = computed(() => products.value.length === 0)
